@@ -20,10 +20,11 @@ shape_original_after_cropping = properties_dict.get('size_after_cropping')
 shape_original_before_cropping = properties_dict.get('original_size_of_raw_data')
 
 # handle multiple labels
-seg_old_spacing = segmentation_softmax[1,:,:,:]
-for label_layer in range(1, segmentation_softmax.shape[0]-1):
-    ind = label_layer+1
-    seg_old_spacing = seg_old_spacing + segmentation_softmax[ind,:,:,:]
+seg_old_spacing = segmentation_softmax[1,:,:,:] # grab only the label=1
+## if want to add all layers together, uncomment the lines below
+# for label_layer in range(1, segmentation_softmax.shape[0]-1):
+#     ind = label_layer+1
+#     seg_old_spacing = seg_old_spacing + segmentation_softmax[ind,:,:,:]
 
 # put result into bbox of cropping
 bbox = properties_dict.get('crop_bbox')
